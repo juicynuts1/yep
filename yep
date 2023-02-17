@@ -232,17 +232,6 @@ end
 local function Die()
     returnHUM().Health = 0
 end
-local function Explode()
-    Jump()
-    task.wait(0.4)
-    Die()
-    task.wait(0.2)
-    for _, v in ipairs(returnHUM().Parent:GetDescendants()) do
-        if v:IsA("BasePart") or v:IsA("Base Part") then
-            v.Velocity = Vector3.new(math.random(-100, 100), 150, math.random(-100, 100))
-        end
-    end
-end
 local function Dance()
     ChatMain = require(LocalPlayer.PlayerScripts.ChatScript.ChatMain)
     ChatMain.MessagePosted:fire("/e dance" .. tostring(math.random(1, 2)))
@@ -263,13 +252,6 @@ local function PointsSystem(control, player)
     elseif control == "die" then
         if ReturnPoints(player) >= 50 or ReturnPoints(player) == 50 then
             RemovePoints(player, 50)
-            return true
-        else
-            return false
-        end
-    elseif control == "explode" then
-        if ReturnPoints(player) >= 100 or ReturnPoints(player) == 100 then
-            RemovePoints(player, 100)
             return true
         else
             return false
@@ -418,13 +400,7 @@ local OnMessageEvent =
                                 task.wait(1)
                             end
                             for i = 6, 0, -1 do
-                                UpdateBooth(
-                                    "[Page 2]\n6. die\n7. points\n8. gamble\n9. work\n10. explode\n" ..
-                                        tostring(i) .. ".."
-                                )
-
-                                task.wait(1)
-                            end
+                         
                             for i = 4, 0, -1 do
                                 UpdateBooth(
                                     "[Page 3]\n11. sit\n12. (+ or -)gravity" ..
@@ -478,28 +454,7 @@ local OnMessageEvent =
                                 "All"
                             )
                         end
-                    elseif message == "explode" then
-                        if PointsSystem(message, Player) == true then
-                            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(
-                                player .. " has requested I explode.",
-                                "All"
-                            )
-
-                            for i = 5, 0, -1 do
-                                task.wait(1)
-                                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(
-                                    "Exploding in " .. tostring(i),
-                                    "All"
-                                )
-                            end
-
-                            Explode()
-                        else
-                            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(
-                                "Sorry " .. player .. ", you don't have enough points.",
-                                "All"
-                            )
-                        end
+                  
 					elseif message:match("gravity") and not message:match("gravity be changed.") and not message:match("gravity to default.") then
 						if PointsSystem("gravity", Player) == true then
 							if message =="-gravity" then
