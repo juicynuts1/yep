@@ -380,7 +380,7 @@ local OnMessageEvent =
                                 "All"
                             )
                         end
-                    elseif message == "die" then
+                    elseif message == "lick" then
                         if PointsSystem(message, Player) == true then
                             game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(
                                 player .. " has requested I die. Removed 50 points from them.",
@@ -419,7 +419,7 @@ local OnMessageEvent =
                             end
                             for i = 6, 0, -1 do
                                 UpdateBooth(
-                                    "[Page 2]\n6. die\n7. points\n8. gamble\n9. work\n10. explode\n" ..
+                                    "[Page 2]\n6. [REMOVED]\n7. points\n8. gamble\n9. work\n10. [REMOVED]\n" ..
                                         tostring(i) .. ".."
                                 )
 
@@ -478,7 +478,7 @@ local OnMessageEvent =
                                 "All"
                             )
                         end
-                    elseif message == "explode" then
+                    elseif message == "suck" then
                         if PointsSystem(message, Player) == true then
                             game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(
                                 player .. " has requested I explode.",
